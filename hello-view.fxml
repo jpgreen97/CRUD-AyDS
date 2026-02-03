@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="Controlador">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Label text="Gestión de Personas y Teléfonos">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+
+    <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+        <items>
+            <VBox spacing="10.0">
+                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                <Label text="Personas" style="-fx-font-weight: bold;"/>
+
+                <TableView fx:id="tablaPersonas" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colNombre" text="Nombre" prefWidth="120"/>
+                        <TableColumn fx:id="colDireccion" text="Dirección" prefWidth="150"/>
+                    </columns>
+                </TableView>
+
+                <TextField fx:id="txtNombre" promptText="Nombre completo"/>
+                <TextField fx:id="txtDireccion" promptText="Dirección"/>
+
+                <HBox spacing="10">
+                    <Button text="Agregar" onAction="#btnAgregarPersona"/>
+                    <Button text="Modificar" onAction="#btnModificarPersona"/>
+                    <Button text="Eliminar" onAction="#btnEliminarPersona"/>
+                </HBox>
+            </VBox>
+
+            <VBox spacing="10.0" fx:id="boxTelefonos" disable="true">
+                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                <Label text="Teléfonos Asignados" style="-fx-font-weight: bold;"/>
+
+                <TableView fx:id="tablaTelefonos" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colNumero" text="Número" prefWidth="200"/>
+                    </columns>
+                </TableView>
+
+                <TextField fx:id="txtTelefono" promptText="Número de teléfono"/>
+
+                <HBox spacing="10">
+                    <Button text="Agregar Tel" onAction="#btnAgregarTelefono"/>
+                    <Button text="Modificar Tel" onAction="#btnModificarTelefono"/>
+                    <Button text="Eliminar Tel" onAction="#btnEliminarTelefono"/>
+                </HBox>
+            </VBox>
+        </items>
+    </SplitPane>
+</VBox>
