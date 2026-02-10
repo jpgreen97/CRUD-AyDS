@@ -11,13 +11,13 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label text="Gestión de Personas y Teléfonos">
+    <Label text="Gestión de Personas, Teléfonos y Direcciones">
         <font>
             <Font size="18.0"/>
         </font>
     </Label>
 
-    <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.4" VBox.vgrow="ALWAYS">
         <items>
             <VBox spacing="10.0">
                 <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
@@ -25,13 +25,11 @@
 
                 <TableView fx:id="tablaPersonas" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colNombre" text="Nombre" prefWidth="120"/>
-                        <TableColumn fx:id="colDireccion" text="Dirección" prefWidth="150"/>
+                        <TableColumn fx:id="colNombre" text="Nombre" prefWidth="200"/>
                     </columns>
                 </TableView>
 
                 <TextField fx:id="txtNombre" promptText="Nombre completo"/>
-                <TextField fx:id="txtDireccion" promptText="Dirección"/>
 
                 <HBox spacing="10">
                     <Button text="Agregar" onAction="#btnAgregarPersona"/>
@@ -40,24 +38,49 @@
                 </HBox>
             </VBox>
 
-            <VBox spacing="10.0" fx:id="boxTelefonos" disable="true">
-                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
-                <Label text="Teléfonos Asignados" style="-fx-font-weight: bold;"/>
+            <TabPane fx:id="tabPaneDetalles" disable="true" tabClosingPolicy="UNAVAILABLE">
+                <tabs>
+                    <Tab text="Teléfonos">
+                        <content>
+                            <VBox spacing="10.0">
+                                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                                <TableView fx:id="tablaTelefonos" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="colNumero" text="Número" prefWidth="200"/>
+                                    </columns>
+                                </TableView>
 
-                <TableView fx:id="tablaTelefonos" VBox.vgrow="ALWAYS">
-                    <columns>
-                        <TableColumn fx:id="colNumero" text="Número" prefWidth="200"/>
-                    </columns>
-                </TableView>
+                                <TextField fx:id="txtTelefono" promptText="Número de teléfono"/>
 
-                <TextField fx:id="txtTelefono" promptText="Número de teléfono"/>
+                                <HBox spacing="10">
+                                    <Button text="Agregar Tel" onAction="#btnAgregarTelefono"/>
+                                    <Button text="Modificar Tel" onAction="#btnModificarTelefono"/>
+                                    <Button text="Eliminar Tel" onAction="#btnEliminarTelefono"/>
+                                </HBox>
+                            </VBox>
+                        </content>
+                    </Tab>
 
-                <HBox spacing="10">
-                    <Button text="Agregar Tel" onAction="#btnAgregarTelefono"/>
-                    <Button text="Modificar Tel" onAction="#btnModificarTelefono"/>
-                    <Button text="Eliminar Tel" onAction="#btnEliminarTelefono"/>
-                </HBox>
-            </VBox>
+                    <Tab text="Direcciones">
+                        <content>
+                            <VBox spacing="10.0">
+                                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                                <TableView fx:id="tablaDirecciones" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="colCalle" text="Calle" prefWidth="150"/>
+                                        <TableColumn fx:id="colCiudad" text="Ciudad" prefWidth="100"/>
+                                    </columns>
+                                </TableView>
+
+                                <TextField fx:id="txtCalle" promptText="Calle y Número"/>
+                                <TextField fx:id="txtCiudad" promptText="Ciudad"/>
+
+                                <Button text="Agregar Dirección" maxWidth="Infinity" onAction="#btnAgregarDireccion"/>
+                            </VBox>
+                        </content>
+                    </Tab>
+                </tabs>
+            </TabPane>
         </items>
     </SplitPane>
 </VBox>
