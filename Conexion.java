@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public class Conexion {
     //  Datos de la conexion
     private static final String URL = "jdbc:mysql://localhost:3306/Agenda";
-    private static final String USER = "root";  
+    private static final String USER = "root";
     private static final String PASSWORD = "qwertyui";
 
     private static Connection instance;
@@ -14,7 +14,7 @@ public class Conexion {
         try {
             // Verifica si la conexiOn está cerrada o es nula para abrirla
             if (instance == null || instance.isClosed()) {
-                // Carga el driver (opcional en versiones nuevas de Java, pero buena práctica)
+                // Carga el driver
                 Class.forName("com.mysql.cj.jdbc.Driver");
 
                 instance = DriverManager.getConnection(URL, USER, PASSWORD);

@@ -12,12 +12,11 @@ public class PersonaDAO {
         this.con = Conexion.getConnection();
     }
 
-    // 1. INSERTAR (Alta)
+    // 1. INSERTAR
     public boolean insertar(Persona p) {
-        String sql = "INSERT INTO Personas (nombre, direccion) VALUES (?, ?)";
+        String sql = "INSERT INTO Personas (nombre) VALUES (?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, p.getNombre());
-            ps.setString(2, p.getDireccion());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -28,11 +27,10 @@ public class PersonaDAO {
 
     // 2. MODIFICAR
     public boolean modificar(Persona p) {
-        String sql = "UPDATE Personas SET nombre = ?, direccion = ? WHERE id = ?";
+        String sql = "UPDATE Personas SET nombre = ? WHERE id = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, p.getNombre());
-            ps.setString(2, p.getDireccion());
-            ps.setInt(3, p.getId());
+            ps.setInt(2, p.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -41,7 +39,7 @@ public class PersonaDAO {
         }
     }
 
-    // 3. ELIMINAR (Baja)
+    // ELIMINAR
     public boolean eliminar(int id) {
         String sql = "DELETE FROM Personas WHERE id = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -53,19 +51,17 @@ public class PersonaDAO {
             return false;
         }
     }
-
-    // 4. CONSULTAR (Obtener todas para la tabla)
+    // CONSULTAR
     public List<Persona> obtenerTodas() {
         List<Persona> lista = new ArrayList<>();
         String sql = "SELECT * FROM Personas";
         try (PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                Persona p = new Persona(
-                        rs.getInt("id"),
-                        rs.getString("nombre"),
-                        rs.getString("direccion")
-                );
+                Persona p = new Persona();
+                p.setId(rs.getInt("id"));
+                p.setNombre(rs.getString("nombre"));
+
                 lista.add(p);
             }
         } catch (SQLException e) {
